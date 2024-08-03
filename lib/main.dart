@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'qrshare.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -157,7 +158,7 @@ class _MyAppState extends State<MyApp> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 80, left: 20, right: 50),
+                                        top: 70, left: 20, right: 50),
                                     child: Container(
                                       width: double.infinity,
                                       height: 30,
@@ -245,7 +246,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, left: 20, right: 50),
+                                        top: 15, left: 20, right: 50),
                                     child: Container(
                                       width: double.infinity,
                                       height: 100,
@@ -260,14 +261,12 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SizedBox(height:20),
                                   Row(
                                     children: [
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.all(20),
+                                          padding: const EdgeInsets.only(left:20,right:10),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color: Color(0xffEBEEED),
@@ -338,57 +337,57 @@ class _MyAppState extends State<MyApp> {
                                                                       const EdgeInsets
                                                                           .all(
                                                                           40),
-                                                                  child:
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                    'images/Layer_1.svg',
-                                                                    height: 220,
-                                                                    width: 220,
+                                                                  child:QrImageView(
+                                                                    data: 'https://www.google.co.in/',
+                                                                    version: QrVersions.auto,
+                                                                    size: 200.0,
                                                                   ),
                                                                 ),
-                                                                ElevatedButton(
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    foregroundColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    backgroundColor:
-                                                                        Color(
-                                                                            0xff29695D),
-                                                                    padding: EdgeInsets
-                                                                        .fromLTRB(
-                                                                            100,
-                                                                            20,
-                                                                            100,
-                                                                            20),
-                                                                  ),
-                                                                  child:
-                                                                      const Text(
-                                                                    'Share Qr Code',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      fontFamily:
-                                                                          'Ubuntu',
+                                                                Padding(
+                                                                  padding: const EdgeInsets.only(left: 20,right: 20),
+                                                                  child: Container(
+                                                                    width: double.infinity,
+                                                                    height: 50,
+                                                                    child: ElevatedButton(
+                                                                      style: ElevatedButton
+                                                                          .styleFrom(
+                                                                        foregroundColor:
+                                                                            Colors
+                                                                                .white,
+                                                                        backgroundColor:
+                                                                            Color(
+                                                                                0xff29695D),
+
+                                                                      ),
+                                                                      child:
+                                                                          const Text(
+                                                                        'Share Qr Code',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w700,
+                                                                          fontFamily:
+                                                                              'Ubuntu',
+                                                                        ),
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.pop(
+                                                                            context); // Close the first bottom sheet
+                                                                        showModalBottomSheet<
+                                                                            void>(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext
+                                                                                  context) {
+                                                                            return SecondBottomSheet();
+                                                                          },
+                                                                        );
+                                                                      },
                                                                     ),
                                                                   ),
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.pop(
-                                                                        context); // Close the first bottom sheet
-                                                                    showModalBottomSheet<
-                                                                        void>(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (BuildContext
-                                                                              context) {
-                                                                        return SecondBottomSheet();
-                                                                      },
-                                                                    );
-                                                                  },
                                                                 ),
                                                               ],
                                                             ),
@@ -413,12 +412,10 @@ class _MyAppState extends State<MyApp> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 16,
-                                      ),
+                                      
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.all(20),
+                                          padding: const EdgeInsets.only(left:10,right:20),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color: Color(0xffEBEEED),
@@ -477,7 +474,7 @@ class _MyAppState extends State<MyApp> {
                                                                   height: 32,
                                                                 ),
                                                                 const Text(
-                                                                  'Share QR Code',
+                                                                  'Share a Business Card',
                                                                   style:
                                                                       TextStyle(
                                                                     fontWeight:
@@ -513,10 +510,7 @@ class _MyAppState extends State<MyApp> {
                                                                                 BoxDecoration(
                                                                               color: Color(0xffEBEEED),
                                                                               borderRadius: BorderRadius.circular(50),
-                                                                              border: Border.all(
-                                                                                color: Color(0xffDCE2E1), // Border color
-                                                                                width: 1.0, // Border width
-                                                                              ), // Border radius
+                                                                            // Border radius
                                                                             ),
                                                                             child:
                                                                                 Padding(
@@ -556,10 +550,7 @@ class _MyAppState extends State<MyApp> {
                                                                                 BoxDecoration(
                                                                               color: Color(0xffEBEEED),
                                                                               borderRadius: BorderRadius.circular(50),
-                                                                              border: Border.all(
-                                                                                color: Color(0xffDCE2E1), // Border color
-                                                                                width: 1.0, // Border width
-                                                                              ), // Border radius
+                                                                             // Border radius
                                                                             ),
                                                                             child:
                                                                                 Padding(
@@ -599,10 +590,7 @@ class _MyAppState extends State<MyApp> {
                                                                                 BoxDecoration(
                                                                               color: Color(0xffEBEEED),
                                                                               borderRadius: BorderRadius.circular(50),
-                                                                              border: Border.all(
-                                                                                color: Color(0xffDCE2E1), // Border color
-                                                                                width: 1.0, // Border width
-                                                                              ), // Border radius
+                                                                             // Border radius
                                                                             ),
                                                                             child:
                                                                                 Padding(
@@ -642,10 +630,7 @@ class _MyAppState extends State<MyApp> {
                                                                                 BoxDecoration(
                                                                               color: Color(0xffEBEEED),
                                                                               borderRadius: BorderRadius.circular(50),
-                                                                              border: Border.all(
-                                                                                color: Color(0xffDCE2E1), // Border color
-                                                                                width: 1.0, // Border width
-                                                                              ), // Border radius
+                                                                              // Border radius
                                                                             ),
                                                                             child:
                                                                                 Padding(
@@ -726,6 +711,7 @@ class _MyAppState extends State<MyApp> {
                                                                   padding: const EdgeInsets.only(left:20,right:20),
                                                                   child: Container(
                                                                     width: double.infinity,
+                                                                    height: 50,
                                                                     child: ElevatedButton(
                                                                       style: ElevatedButton
                                                                           .styleFrom(
@@ -782,7 +768,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, left: 20, right: 20),
+                                        top: 20, left: 20, right: 20),
                                     child: Container(
                                       height: 50,
                                       width: double.infinity,
@@ -818,7 +804,7 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 20,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -827,7 +813,7 @@ class _MyAppState extends State<MyApp> {
                                       height: 20,
                                       width: double.infinity,
                                       child: Text(
-                                        'Social media links',
+                                        'Social media links(Levitate)',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 17,
@@ -838,9 +824,7 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Row(
@@ -973,11 +957,11 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 15,
+                                    height: 20,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, left: 20, right: 20),
+                                         left: 20, right: 20),
                                     child: Container(
                                       height: 20,
                                       width: double.infinity,
@@ -993,9 +977,7 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+                                 
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Row(
@@ -1128,7 +1110,7 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 15,
+                                    height: 10,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -1148,9 +1130,7 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+                                  
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Column(
@@ -1232,7 +1212,7 @@ class _MyAppState extends State<MyApp> {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 3,
                                         ),
                                         Container(
                                           height: 90,
@@ -1551,10 +1531,7 @@ class _MyAppState extends State<MyApp> {
                                       ],
                                     ),
                                   ), //Contact
-
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+                                  
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Divider(
@@ -1563,9 +1540,7 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
 
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 10, left: 20, right: 20),
@@ -1648,12 +1623,10 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 40,
-                                  ),
+                                 
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, left: 20, right: 20),
+                                        top: 40, left: 20, right: 20),
                                     child: Container(
                                       height: 20,
                                       width: double.infinity,
@@ -1670,7 +1643,7 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Column(
                                     children: [
@@ -2127,9 +2100,7 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ],
                                   ), //services
-                                  SizedBox(
-                                    height: 15,
-                                  ),
+                                 
                                   Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Divider(
@@ -2147,7 +2118,7 @@ class _MyAppState extends State<MyApp> {
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height /
-                                                2,
+                                                4,
                                             child: PageView.builder(
                                                 controller: _pageController,
                                                 itemCount: imagePaths.length,
@@ -2161,7 +2132,7 @@ class _MyAppState extends State<MyApp> {
                                                 }),
                                           ),
                                           Positioned(
-                                            bottom: 10,
+                                            bottom: 3,
                                             left: 0,
                                             right: 0,
                                             child: Container(
@@ -2204,7 +2175,7 @@ class _MyAppState extends State<MyApp> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 69,
+                                        height: 70,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -2229,7 +2200,7 @@ class _MyAppState extends State<MyApp> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 98,
+                                        height: 20,
                                       ),
                                     ],
                                   ),
@@ -2272,7 +2243,7 @@ class ImagesPlace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(105)),
+      borderRadius: BorderRadius.all(Radius.circular(90)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Image.asset(
@@ -2299,7 +2270,7 @@ class SecondBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 32,
+            height: 40,
           ),
           const Text(
             'Share QR Code',
@@ -2325,10 +2296,7 @@ class SecondBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xffEBEEED),
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: Color(0xffDCE2E1), // Border color
-                          width: 1.0, // Border width
-                        ), // Border radius
+                       // Border radius
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15),
@@ -2362,10 +2330,7 @@ class SecondBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xffEBEEED),
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: Color(0xffDCE2E1), // Border color
-                          width: 1.0, // Border width
-                        ), // Border radius
+                        // Border radius
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15),
@@ -2399,10 +2364,7 @@ class SecondBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xffEBEEED),
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: Color(0xffDCE2E1), // Border color
-                          width: 1.0, // Border width
-                        ), // Border radius
+                      // Border radius
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15),
@@ -2436,10 +2398,7 @@ class SecondBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xffEBEEED),
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: Color(0xffDCE2E1), // Border color
-                          width: 1.0, // Border width
-                        ), // Border radius
+                        // Border radius
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15),
@@ -2469,12 +2428,13 @@ class SecondBottomSheet extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 40,
           ),
           Padding(
-            padding: const EdgeInsets.only(left:20,right: 20), //a
+            padding: const EdgeInsets.only(left:20,right: 20), //abgir
             child: Container(
               width: double.infinity,
+              height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
